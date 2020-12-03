@@ -25,6 +25,10 @@ public class CloudSpawner : MonoBehaviour
         SetMinAndMax();
         CreateClouds();
         player = GameObject.Find("Player");
+
+        // to initially diactivate all the collectables(life and coin) on starting the game
+        for (int i = 0; i < collectables.Length; i++)
+            collectables[i].SetActive(false);
     }
 
     private void Start()
@@ -173,6 +177,32 @@ public class CloudSpawner : MonoBehaviour
 
                         clouds[i].transform.position = temp;    //finally assigning the temp variable to the cloud after randomizing new values of x and y coordinate of temp Vector3 variable
                         clouds[i].SetActive(true);     // till this step, the inactivated cloud was still inactive
+
+                        // respawning collectables
+                        int random = Random.Range(0, collectables.Length);
+
+                        if(clouds[i].tag != "Deadly")
+                        {
+                            if (!collectables[random].activeInHierarchy)
+                            {
+                                Vector3 temp2 = clouds[i].transform.position;
+                                temp2.y += 0.7f;    // as we want collectable to be above the cloud
+
+                                if(collectables[random].tag == "Life")
+                                {
+                                    if(PlayerScore.lifeCount < 2)   // as we don't want the player to have more than two lives
+                                    {
+                                        collectables[random].transform.position = temp2;
+                                        collectables[random].SetActive(true);
+                                    }
+                                }
+                                else  // coin
+                                {
+                                    collectables[random].transform.position = temp2;
+                                    collectables[random].SetActive(true);
+                                }
+                            }   
+                        }
                     }
                 }
             }

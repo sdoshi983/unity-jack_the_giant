@@ -12,9 +12,11 @@ public class PlayerScore : MonoBehaviour
     private Vector3 previousPosition;
     private bool countScore;
 
-    private static int scoreCount;
-    private static int lifeCount;
-    private static int coinCount;
+    public static int scoreCount;
+    public static int lifeCount;
+    public static int coinCount;
+
+    private bool gameStarted = true;
 
     private void Awake()
     {
@@ -35,11 +37,15 @@ public class PlayerScore : MonoBehaviour
     {
         if (countScore)
         {
-            if(transform.position.y < previousPosition.y)
+            if (transform.position.y < previousPosition.y && !gameStarted)
             {
                 scoreCount++;
             }
+            else
+                gameStarted = false;
+
             previousPosition = transform.position;
+            GamePlayController.instance.SetScore(scoreCount);
         }
     }
 
@@ -51,6 +57,8 @@ public class PlayerScore : MonoBehaviour
             scoreCount += 200;
             AudioSource.PlayClipAtPoint(coinClip, transform.position);
             target.gameObject.SetActive(false);
+            GamePlayController.instance.SetScore(scoreCount);
+            GamePlayController.instance.SetCoinScore(coinCount);
         }
 
         if(target.tag == "Life")
@@ -59,6 +67,8 @@ public class PlayerScore : MonoBehaviour
             scoreCount += 300;
             AudioSource.PlayClipAtPoint(lifeClip, transform.position);
             target.gameObject.SetActive(false);
+            GamePlayController.instance.SetScore(scoreCount);
+            GamePlayController.instance.SetLifeScore(lifeCount);
         }
 
         if(target.tag == "Bounds" || target.tag == "Deadly")
@@ -67,6 +77,9 @@ public class PlayerScore : MonoBehaviour
             countScore = false;
             transform.position = new Vector3(500, 500, 0);
             lifeCount--;
+            
+            GameManager.instance.CheckGameStatus(scoreCount, coinCount, lifeCount);
+            //GamePlayController.instance.GameOverShowPanel(scoreCount, coinCount);
         }
     }
 }
