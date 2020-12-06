@@ -34,7 +34,8 @@ public class MainMenuController : MonoBehaviour
     public void StartGame()
     {
         GameManager.instance.gameStartedFromMainMenu = true;
-        SceneManager.LoadScene("MainScene");
+        //SceneManager.LoadScene("MainScene");
+        SceneFaderScript.instance.LoadLevel("MainScene");
     }
 
     public void HighScoreMenu()
