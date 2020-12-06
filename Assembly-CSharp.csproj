@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\GameControllers\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\GameControllers\MusicController.cs" />
     <Compile Include="Assets\Scripts\BackgroundScripts\Collectors\BGSpawner.cs" />
+    <Compile Include="Assets\Scripts\MyCoroutine\MyCoroutine.cs" />
     <Compile Include="Assets\Scripts\SceneFaderScripts\SceneFaderScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScript\Player.cs" />
     <Compile Include="Assets\Scripts\CollectableScripts\CollectableScript.cs" />
@@ -74,7 +75,8 @@
     <Compile Include="Assets\Scripts\GameControllers\HighScoreController.cs" />
     <Compile Include="Assets\Scripts\PlayerScript\PlayerScore.cs" />
     <Compile Include="Assets\Scripts\GameControllers\GamePlayController.cs" />
-    <Compile Include="Assets\Scripts\MyCoroutine\MyCoroutine.cs" />
+    <Compile Include="Assets\Scripts\JoyStick Scripts\Joystick.cs" />
+    <Compile Include="Assets\Scripts\PlayerScript\PlayerMoveJoystick.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Font\readme.txt" />
